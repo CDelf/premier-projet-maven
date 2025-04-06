@@ -33,7 +33,7 @@
     <dependency>
       <groupId>com.github.lalyos</groupId>
       <artifactId>jfiglet</artifactId>
-      <version>0.0.8</version>
+      <version>0.0.9</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -93,5 +93,36 @@
         </plugin>
       </plugins>
     </pluginManagement>
+    <!-- plugin maven-jar-plugin: jar incluant fichier META-INF/MANIFEST.MF
+       dont un attribut Main-Class est renseigné. -->
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.4.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>dev.App</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <!-- configuration du plugin shade : créer un uber-jar
+      qui contient toutes les classes compilées du projet-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
 </project>
